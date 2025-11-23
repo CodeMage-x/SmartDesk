@@ -1,64 +1,112 @@
 # SmartDesk
-IT Support Ticketing System
+### IT Support Ticketing System
 
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+SmartDesk is a comprehensive IT support ticketing solution designed to streamline helpdesk operations. It facilitates efficient issue tracking and resolution by connecting End Users with specialized Helpdesk Agents, all overseen by Super Administrators.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Key Features
 
-## About Laravel
+*   **Role-Based Access Control (RBAC):** Distinct dashboards and permissions for **Super Admins**, **Helpdesk Agents**, and **End Users**.
+*   **Intelligent Ticket Routing:** Tickets are automatically assigned to available agents based on the ticket's category (e.g., Hardware, Software, Network).
+*   **Ticket Lifecycle Management:** Full workflow support from creation to closure (Open &rarr; In Progress &rarr; Resolved &rarr; Closed).
+*   **Priority & Categorization:** Users can tag tickets with priorities (Low, Medium, High) and specific categories to ensure critical issues are addressed first.
+*   **Audit Trail:** Detailed history tracking for every ticket, recording status changes, assignments, and remarks.
+*   **User Management:** Administrative tools to create users, manage roles, and toggle account status.
+*   **Secure Authentication:** Includes forced password changes for new accounts and secure session management.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tech Stack
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+*   **Backend:** [Laravel 12](https://laravel.com) (PHP 8.2+)
+*   **Frontend:** Blade Templates, [Tailwind CSS 4.0](https://tailwindcss.com)
+*   **Database:** MySQL (Compatible with WAMP/XAMPP)
+*   **Build Tools:** [Vite](https://vitejs.dev), [Composer](https://getcomposer.org), [NPM](https://www.npmjs.com)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Installation Instructions (Windows / WAMP)
 
-## Learning Laravel
+Follow these steps to set up the project on your local Windows machine using WAMP Server.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Prerequisites
+*   **WAMP Server** installed and running (Apache, MySQL, PHP).
+*   **Git** installed.
+*   **Composer** installed.
+*   **Node.js & NPM** installed.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Steps
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1.  **Clone the Repository**
+    Open your terminal (Command Prompt or PowerShell) and navigate to your `www` directory (usually `C:\wamp64\www`).
+    ```bash
+    git clone <repository-url>
+    cd smartdesk
+    ```
 
-## Laravel Sponsors
+2.  **Install Backend Dependencies**
+    ```bash
+    composer install
+    ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+3.  **Install Frontend Dependencies**
+    ```bash
+    npm install
+    ```
 
-### Premium Partners
+4.  **Configure Environment**
+    Copy the example environment file:
+    ```bash
+    copy .env.example .env
+    ```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+    Open the `.env` file in your text editor. Update the database settings to match your WAMP default configuration (**User: root, Password: empty**):
+    ```ini
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=smartdesk
+    DB_USERNAME=root
+    DB_PASSWORD=
+    ```
 
-## Contributing
+5.  **Generate Application Key**
+    ```bash
+    php artisan key:generate
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+6.  **Create Database & Run Migrations**
+    Ensure your WAMP MySQL server is running. The following command will create the database (if it doesn't exist), create the tables, and seed the system with default users:
+    ```bash
+    php artisan migrate --seed
+    ```
 
-## Code of Conduct
+7.  **Build Assets**
+    ```bash
+    npm run build
+    ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Usage
 
-## Security Vulnerabilities
+1.  **Start the Application**
+    Since you are on WAMP, you can access the site via `http://localhost/smartdesk/public` OR you can run the artisan server:
+    ```bash
+    php artisan serve
+    ```
+    Access at: `http://localhost:8000`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+2.  **Login Credentials**
+    The system comes pre-loaded with the following accounts:
+
+    | Role | Email | Password |
+    |------|-------|----------|
+    | **Super Admin** | `admin@smartdesk.com` | `admin123` |
+    | **Helpdesk Agent** | `john.smith@smartdesk.com` | `agent123` |
+    | **End User** | `alice.brown@company.com` | `user123` |
+
+### Screenshots
+
+*(Place screenshots of the Dashboard here)*
+
+*(Place screenshots of the Ticket Creation form here)*
+
+*(Place screenshots of the Agent Ticket Pool here)*
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
